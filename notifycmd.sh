@@ -1,6 +1,7 @@
 #!/bin/bash
-GROUP_ID={ Enter Telegram Group-ID inside here, eg. -100123456703 }
-BOT_TOKEN={ Enter Telegram-Bot Token inside here, eg. 123456789:ABCDEfGHiJklmN_oPQRstUvwQyz }
+# Edit GROUP_ID and BOT_TOKEN with your values
+GROUP_ID=-100123456703
+BOT_TOKEN=123456789:ABCDEfGHiJklmN_oPQRstUvwQyz
 NOW=$(date)
 case "${NOTIFYTYPE}" in
     ONLINE|COMMOK)
@@ -19,8 +20,7 @@ esac
 EMOJI+=$'\xEF\xB8\x8F' # The emoji should be displayed with emoji presentation
 MESSAGE="${EMOJI} UPS Notification%0A"
 MESSAGE+="UPS Name: $UPSNAME %0ANotify type: $NOTIFYTYPE %0ANotify message: $*"
-curl \
--s \
+curl -s \
 --data "parse_mode=HTML" \
 --data "text=$MESSAGE" \
---data "chat_id=$GROUP_ID" 'https://api.telegram.org/bot'$BOT_TOKEN'/sendMessage' > /dev/null
+--data "chat_id="$GROUP_ID 'https://api.telegram.org/bot'$BOT_TOKEN'/sendMessage' > /dev/null
